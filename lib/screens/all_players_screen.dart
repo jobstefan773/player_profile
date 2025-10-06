@@ -151,10 +151,14 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
             Expanded(
               child: filteredPlayers.isEmpty
                   ? Center(
-                      child: Text(
-                        widget.players.isEmpty
-                            ? 'No player profiles yet. Tap the add button to create one.'
-                            : 'No players found for "$_searchTerm".',
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          widget.players.isEmpty
+                              ? 'No player profiles yet. Tap the add button to create one.'
+                              : 'No players found for "$_searchTerm".',
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     )
                   : ListView.separated(
@@ -181,9 +185,15 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
                             return shouldDelete == true;
                           },
                           background: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 4),
                             alignment: Alignment.centerRight,
                             padding: const EdgeInsets.symmetric(horizontal: 24),
-                            color: Theme.of(context).colorScheme.errorContainer,
+                            decoration: BoxDecoration(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.errorContainer,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                             child: Icon(
                               Icons.delete,
                               color: Theme.of(
@@ -192,9 +202,11 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
                             ),
                           ),
                           child: Card(
+                            margin: EdgeInsets.zero,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
+                            clipBehavior: Clip.antiAlias,
                             child: ListTile(
                               onTap: () => _openEditPlayer(player),
                               leading: CircleAvatar(
