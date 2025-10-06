@@ -49,6 +49,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
         builder: (context) => PlayerFormPage(
           title: 'Add New Player',
           onSubmit: widget.onAddPlayer,
+          existingPlayers: List<Player>.from(widget.players),
         ),
       ),
     );
@@ -61,6 +62,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
           title: 'Edit Player Profile',
           initialPlayer: player,
           onSubmit: widget.onUpdatePlayer,
+          existingPlayers: List<Player>.from(widget.players),
           onDelete: (playerToDelete) {
             widget.onDeletePlayer(playerToDelete);
             if (mounted) {

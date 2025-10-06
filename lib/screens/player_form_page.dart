@@ -13,12 +13,14 @@ class PlayerFormPage extends StatefulWidget {
     this.initialPlayer,
     required this.onSubmit,
     this.onDelete,
+    required this.existingPlayers,
   });
 
   final String title;
   final Player? initialPlayer;
   final ValueChanged<Player> onSubmit;
   final ValueChanged<Player>? onDelete;
+  final List<Player> existingPlayers;
 
   bool get isEditing => initialPlayer != null;
 
@@ -130,6 +132,36 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return null;
   }
 
+  String? _nicknameValidator(String? value) {
+    final basic = _requiredValidator(value, fieldName: 'Nickname');
+    if (basic != null) {
+      return basic;
+    }
+    final trimmed = value!.trim().toLowerCase();
+    final exists = widget.existingPlayers
+        .where((player) => player.id != widget.initialPlayer?.id)
+        .any((player) => player.nickname.toLowerCase() == trimmed);
+    if (exists) {
+      return 'Nickname already exists';
+    }
+    return null;
+  }
+
+  String? _fullNameValidator(String? value) {
+    final basic = _requiredValidator(value, fieldName: 'Full name');
+    if (basic != null) {
+      return basic;
+    }
+    final trimmed = value!.trim().toLowerCase();
+    final exists = widget.existingPlayers
+        .where((player) => player.id != widget.initialPlayer?.id)
+        .any((player) => player.fullName.toLowerCase() == trimmed);
+    if (exists) {
+      return 'Full name already exists';
+    }
+    return null;
+  }
+
   String? _emailValidator(String? value) {
     final basic = _requiredValidator(value, fieldName: 'Email');
     if (basic != null) {
@@ -175,8 +207,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
                 hint: 'Enter nickname',
                 icon: Icons.person,
                 textInputAction: TextInputAction.next,
-                validator: (value) =>
-                    _requiredValidator(value, fieldName: 'Nickname'),
+                validator: _nicknameValidator,
               ),
               const SizedBox(height: 16),
               PlayerTextField(
@@ -185,8 +216,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
                 hint: 'Enter full name',
                 icon: Icons.badge,
                 textInputAction: TextInputAction.next,
-                validator: (value) =>
-                    _requiredValidator(value, fieldName: 'Full name'),
+                validator: _fullNameValidator,
               ),
               const SizedBox(height: 16),
               PlayerTextField(
