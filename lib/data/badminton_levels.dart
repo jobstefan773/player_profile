@@ -1,35 +1,5 @@
 import 'package:flutter/material.dart';
 
-class BadmintonLevelTick {
-  const BadmintonLevelTick({
-    required this.group,
-    required this.groupShort,
-    required this.strength,
-    required this.strengthShort,
-  });
-
-  final String group;
-  final String groupShort;
-  final String strength;
-  final String strengthShort;
-}
-
-class LevelGroup {
-  const LevelGroup({
-    required this.name,
-    required this.display,
-    required this.startIndex,
-    required this.endIndex,
-  });
-
-  final String name;
-  final String display;
-  final int startIndex;
-  final int endIndex;
-
-  int get length => endIndex - startIndex + 1;
-}
-
 const List<BadmintonLevelTick> kBadmintonLevelTicks = [
   BadmintonLevelTick(
     group: 'Beginners',
@@ -187,4 +157,34 @@ String describeLevelRange(RangeValues range) {
     return startLabel;
   }
   return '$startLabel, $endLabel';
+}
+
+class BadmintonLevelTick {
+  const BadmintonLevelTick({
+    required this.group,
+    required this.groupShort,
+    required this.strength,
+    required this.strengthShort,
+  });
+
+  final String group;
+  final String groupShort;
+  final String strength;
+  final String strengthShort;
+}
+
+class LevelGroup {
+  const LevelGroup({
+    required this.name,
+    required this.display,
+    required this.startIndex,
+    required this.endIndex,
+  });
+
+  final String name;
+  final String display;
+  final int startIndex;
+  final int endIndex;
+
+  int get length => endIndex - startIndex + 1;
 }
