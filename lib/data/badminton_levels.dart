@@ -160,15 +160,10 @@ const List<BadmintonLevelTick> kBadmintonLevelTicks = [
 ];
 
 const List<LevelGroup> kBadmintonLevelGroups = [
-  LevelGroup(
-    name: 'Beginners',
-    display: 'Beginners',
-    startIndex: 0,
-    endIndex: 2,
-  ),
+  LevelGroup(name: 'Beginners', display: 'Beg', startIndex: 0, endIndex: 2),
   LevelGroup(
     name: 'Intermediate',
-    display: 'Intermediate',
+    display: 'Inter',
     startIndex: 3,
     endIndex: 5,
   ),

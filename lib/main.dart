@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'models/player.dart';
+import 'data/seed_players.dart';
 import 'screens/all_players_screen.dart';
 
 void main() {
@@ -12,13 +13,36 @@ class PlayerProfilesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.fromSeed(seedColor: const Color(0xFF1616FF))
+        .copyWith(
+          primary: const Color(0xFF00008B),
+          onPrimary: Colors.white,
+          primaryContainer: const Color(0xFF00005A),
+          onPrimaryContainer: Colors.white,
+        );
+
     return MaterialApp(
       title: 'Player Profiles',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.indigo,
+        colorScheme: colorScheme,
         scaffoldBackgroundColor: const Color(0xFFF5F7FB),
+        appBarTheme: AppBarTheme(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          centerTitle: true,
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: colorScheme.primary,
+            foregroundColor: colorScheme.onPrimary,
+          ),
+        ),
       ),
       home: const PlayerProfilesHome(),
     );
@@ -33,7 +57,7 @@ class PlayerProfilesHome extends StatefulWidget {
 }
 
 class _PlayerProfilesHomeState extends State<PlayerProfilesHome> {
-  final List<Player> _players = [];
+  final List<Player> _players = List<Player>.from(seedPlayers);
 
   void _addPlayer(Player player) {
     final withId = player.copyWith(
