@@ -110,12 +110,6 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
       appBar: AppBar(
         title: const Text('All Players'),
         actions: [
-          if (widget.onOpenGames != null)
-            IconButton(
-              onPressed: widget.onOpenGames,
-              icon: const Icon(Icons.sports_tennis_outlined),
-              tooltip: 'View Games',
-            ),
           IconButton(
             onPressed: _openAddPlayer,
             icon: const Icon(Icons.add_circle_outline),
