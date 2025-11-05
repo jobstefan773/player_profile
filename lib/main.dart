@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'data/default_user_settings.dart';
+import 'data/seed_games.dart';
 import 'data/seed_players.dart';
 import 'models/game.dart';
 import 'models/player.dart';
@@ -61,10 +62,17 @@ class PlayerProfilesHome extends StatefulWidget {
 }
 
 class _PlayerProfilesHomeState extends State<PlayerProfilesHome> {
-  final List<Player> _players = List<Player>.from(seedPlayers);
-  List<Game> _games = const [];
+  late final List<Player> _players;
+  late List<Game> _games;
   UserSettings _settings = defaultUserSettings;
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _players = List<Player>.from(seedPlayers);
+    _games = seedGames(_players);
+  }
 
   void _addPlayer(Player player) {
     final withId = player.copyWith(
@@ -115,6 +123,7 @@ class _PlayerProfilesHomeState extends State<PlayerProfilesHome> {
           _games = List<Game>.from(games);
         });
       },
+      players: _players,
     );
   }
 

@@ -15,6 +15,9 @@ class PlayerTextField extends StatelessWidget {
     this.minLines,
     this.maxLines,
     this.textAlignVertical,
+    this.readOnly = false,
+    this.enableInteractiveSelection,
+    this.onTap,
   });
 
   final TextEditingController controller;
@@ -28,6 +31,9 @@ class PlayerTextField extends StatelessWidget {
   final int? minLines;
   final int? maxLines;
   final TextAlignVertical? textAlignVertical;
+  final bool readOnly;
+  final bool? enableInteractiveSelection;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +43,9 @@ class PlayerTextField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       inputFormatters: inputFormatters,
+      readOnly: readOnly,
+      enableInteractiveSelection: enableInteractiveSelection,
+      onTap: onTap,
       minLines: minLines ?? 1,
       maxLines: maxLines ?? 1,
       textAlignVertical:

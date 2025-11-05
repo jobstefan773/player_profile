@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/game.dart';
+import '../models/player.dart';
 import '../models/user_settings.dart';
 import 'game_form_page.dart';
 import 'user_settings_screen.dart';
@@ -13,12 +14,14 @@ class AllGamesScreen extends StatefulWidget {
     required this.initialSettings,
     required this.onSettingsUpdated,
     required this.onGamesChanged,
+    required this.players,
   });
 
   final List<Game> initialGames;
   final UserSettings initialSettings;
   final ValueChanged<UserSettings> onSettingsUpdated;
   final ValueChanged<List<Game>> onGamesChanged;
+  final List<Player> players;
 
   @override
   State<AllGamesScreen> createState() => _AllGamesScreenState();
@@ -95,6 +98,7 @@ class _AllGamesScreenState extends State<AllGamesScreen> {
       MaterialPageRoute(
         builder: (_) => ViewGameScreen(
           game: game,
+          players: widget.players,
           onEdit: () async {
             final updatedGame = await Navigator.of(context).push<Game>(
               MaterialPageRoute(
@@ -257,7 +261,7 @@ class _AllGamesScreenState extends State<AllGamesScreen> {
                                       '${game.schedules.first.formattedDate} • ${game.schedules.first.courtName}',
                                     ),
                                     Text(
-                                      '${game.playerCount} players • ₱${game.totalCostOverall.toStringAsFixed(2)} total',
+                                      '${game.playerIds.length}/${game.playerCount} players • ₱${game.totalCostOverall.toStringAsFixed(2)} total',
                                     ),
                                   ],
                                 ),

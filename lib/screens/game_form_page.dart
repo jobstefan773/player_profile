@@ -82,7 +82,7 @@ class _GameFormPageState extends State<GameFormPage> {
 
     final courtRate = double.parse(_courtRateController.text.trim());
     final shuttlePrice = double.parse(_shuttlePriceController.text.trim());
-    final playerCount = int.tryParse(_playerCountController.text.trim()) ?? 4;
+    final playerCount = int.parse(_playerCountController.text.trim());
 
     final rawTitle = _titleController.text.trim();
     final resolvedTitle = rawTitle.isEmpty
@@ -107,6 +107,7 @@ class _GameFormPageState extends State<GameFormPage> {
       divideEqually: _divideEqually,
       playerCount: playerCount,
       schedules: _schedules,
+      playerIds: widget.initialGame?.playerIds ?? const [],
     );
 
     Navigator.of(context).pop(game);

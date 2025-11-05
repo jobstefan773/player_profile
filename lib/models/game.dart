@@ -39,6 +39,7 @@ class Game {
     required this.divideEqually,
     required this.playerCount,
     required this.schedules,
+    this.playerIds = const [],
   });
 
   final String? id;
@@ -49,6 +50,7 @@ class Game {
   final bool divideEqually;
   final int playerCount;
   final List<GameSchedule> schedules;
+  final List<String> playerIds;
 
   double get totalCostPerGame => courtRate + shuttlePrice;
   double get totalCostOverall => totalCostPerGame * schedules.length;
@@ -62,6 +64,7 @@ class Game {
     bool? divideEqually,
     int? playerCount,
     List<GameSchedule>? schedules,
+    List<String>? playerIds,
   }) {
     return Game(
       id: id ?? this.id,
@@ -72,6 +75,7 @@ class Game {
       divideEqually: divideEqually ?? this.divideEqually,
       playerCount: playerCount ?? this.playerCount,
       schedules: schedules ?? this.schedules,
+      playerIds: playerIds ?? this.playerIds,
     );
   }
 }
